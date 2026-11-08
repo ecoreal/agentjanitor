@@ -8,7 +8,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-3fb96f.svg)](LICENSE)
 [![node](https://img.shields.io/badge/node-%E2%89%A518.17-339933)](package.json)
 [![dependencies](https://img.shields.io/badge/dependencies-0-339933)](package.json)
-[![tests](https://img.shields.io/badge/tests-26-5ba1f0)](#开发)
+[![tests](https://img.shields.io/badge/tests-31-5ba1f0)](#开发)
 
 [English](README.md)
 
@@ -47,6 +47,10 @@ agentjanitor                 # 完整体检（只读）
 agentjanitor --json          # 机器可读，供 CI / 定时任务
 agentjanitor --no-secrets    # 只看磁盘
 agentjanitor --stale-days 30 # 更严格的可清理判定
+
+# 唯一会删文件的入口：先预览，--yes 才执行
+agentjanitor clean            # 预览将删除什么（不删任何东西）
+agentjanitor clean --yes      # 真正删除过期文件
 ```
 
 ## 只读保证
@@ -69,14 +73,14 @@ agentjanitor --stale-days 30 # 更严格的可清理判定
 
 ```bash
 git clone https://github.com/ecoreal/agentjanitor && cd agentjanitor
-npm test          # 26 个测试全部跑在合成 fixtures 上 —— 永不触碰你的真实 home
+npm test          # 31 个测试全部跑在合成 fixtures 上 —— 永不触碰你的真实 home
 ```
 
 CI 矩阵：Ubuntu/macOS/Windows × Node 18/20/22/24。
 
 ## 路线图
 
-- [ ] `--clean` 交互式清理（依然 opt-in，依然本地）
+- [x] `clean` —— 预览 + 显式 `--yes` 执行
 - [ ] OpenClaw 插件上下文开销估算
 - [ ] `--watch` 定时漂移报告
 

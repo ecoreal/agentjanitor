@@ -8,7 +8,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-3fb96f.svg)](LICENSE)
 [![node](https://img.shields.io/badge/node-%E2%89%A518.17-339933)](package.json)
 [![dependencies](https://img.shields.io/badge/dependencies-0-339933)](package.json)
-[![tests](https://img.shields.io/badge/tests-26-5ba1f0)](#development)
+[![tests](https://img.shields.io/badge/tests-31-5ba1f0)](#development)
 
 [中文说明](README.zh-CN.md)
 
@@ -48,6 +48,10 @@ agentjanitor                 # the full report (read-only)
 agentjanitor --json          # machine-readable, for CI / cron
 agentjanitor --no-secrets    # disk only
 agentjanitor --stale-days 30 # stricter cleanup candidates
+
+# The only deleting path: dry-run preview first, then --yes to execute
+agentjanitor clean            # preview what would go (deletes nothing)
+agentjanitor clean --yes      # actually remove the stale files
 ```
 
 ## The read-only guarantees
@@ -72,14 +76,14 @@ agentjanitor --stale-days 30 # stricter cleanup candidates
 
 ```bash
 git clone https://github.com/ecoreal/agentjanitor && cd agentjanitor
-npm test          # 26 tests against synthetic fixtures — never touches your real home
+npm test          # 31 tests against synthetic fixtures — never touches your real home
 ```
 
 CI runs the matrix on Ubuntu/macOS/Windows × Node 18/20/22/24.
 
 ## Roadmap
 
-- [ ] `--clean` interactive cleanup (still opt-in, still local)
+- [x] `clean` — dry-run preview + explicit `--yes` execution
 - [ ] OpenClaw plugin context-cost estimate
 - [ ] `--watch` mode for timer-based drift reports
 

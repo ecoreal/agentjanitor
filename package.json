@@ -1,6 +1,6 @@
 {
   "name": "agentjanitor",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "The health check for every AI CLI on your machine — disk hogs, plaintext keys, secrets leaked into transcripts, duplicated MCP configs. One command, zero dependencies, read-only.",
   "license": "MIT",
   "author": "ecoreal",

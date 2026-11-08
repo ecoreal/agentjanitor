@@ -101,6 +101,36 @@ export function staleBytes(dir, cutoffMs, { maxEntries = 400000 } = {}) {
   return { bytes, files };
 }
 
+// Same walk, but collects the actual stale file paths — the dry-run list for
+// `agentjanitor clean`. Files only; directories are never candidates.
+export function staleFileList(dir, cutoffMs, { maxEntries = 400000, maxFiles = 50000 } = {}) {
+  const out = [];
+  let visited = 0;
+  const walk = (d) => {
+    let list;
+    try {
+      list = fs.readdirSync(d, { withFileTypes: true });
+    } catch {
+      return;
+    }
+    for (const e of list) {
+      if (++visited > maxEntries || out.length >= maxFiles) return;
+      const full = path.join(d, e.name);
+      try {
+        if (e.isDirectory()) walk(full);
+        else if (e.isFile()) {
+          const st = fs.statSync(full);
+          if (st.mtimeMs < cutoffMs) out.push({ path: full, bytes: st.size, mtimeMs: st.mtimeMs });
+        }
+      } catch {
+        /* skip */
+      }
+    }
+  };
+  walk(dir);
+  return out;
+}
+
 export function humanBytes(n) {
   if (n == null) return "—";
   const units = ["B", "KB", "MB", "GB", "TB"];
