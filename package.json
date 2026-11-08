@@ -1,0 +1,42 @@
+{
+  "name": "agentjanitor",
+  "version": "0.1.0",
+  "description": "The health check for every AI CLI on your machine — disk hogs, plaintext keys, secrets leaked into transcripts, duplicated MCP configs. One command, zero dependencies, read-only.",
+  "license": "MIT",
+  "author": "ecoreal",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ecoreal/agentjanitor.git"
+  },
+  "homepage": "https://github.com/ecoreal/agentjanitor#readme",
+  "bugs": "https://github.com/ecoreal/agentjanitor/issues",
+  "keywords": [
+    "ai",
+    "cli",
+    "claude-code",
+    "codex",
+    "health-check",
+    "disk-usage",
+    "secret-scanning",
+    "mcp",
+    "privacy",
+    "cli"
+  ],
+  "type": "module",
+  "engines": {
+    "node": ">=18.17"
+  },
+  "bin": {
+    "agentjanitor": "src/cli.js"
+  },
+  "files": [
+    "src",
+    "README.md",
+    "README.zh-CN.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node --test test/*.test.js"
+  },
+  "private": false
+}
